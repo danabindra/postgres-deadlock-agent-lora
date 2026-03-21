@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 750" width="1200" height="938" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <!-- Animated dot that travels along a path -->
+    <circle id="dot" r="4"/>
+
+    <!-- Glow effect for active components -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    @keyframes borderPulse {
+      0%, 100% { stroke-opacity: 0.6; }
+      50% { stroke-opacity: 1; }
+    }
+    @keyframes flowRight {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    @keyframes flowLeft {
+      0% { offset-distance: 100%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 0%; opacity: 0; }
+    }
+    @keyframes scanPulse {
+      0%, 100% { r: 6; opacity: 0.3; }
+      50% { r: 12; opacity: 0; }
+    }
+    @keyframes textFade {
+      0%, 20% { opacity: 0; }
+      30%, 70% { opacity: 1; }
+      80%, 100% { opacity: 0; }
+    }
+    .component { animation: pulse 3s ease-in-out infinite; }
+    .active-border { animation: borderPulse 2s ease-in-out infinite; }
+
+    /* Flow dots on each path */
+    .flow-dot-1 {
+      offset-path: path('M 640 130 L 340 130');
+      animation: flowRight 2s linear infinite;
+      fill: #ef4444;
+    }
+    .flow-dot-2 {
+      offset-path: path('M 300 170 L 380 225');
+      animation: flowRight 3s linear infinite;
+      animation-delay: 0.5s;
+      fill: #3b82f6;
+    }
+    .flow-dot-3a {
+      offset-path: path('M 590 275 L 650 275');
+      animation: flowRight 1.5s linear infinite;
+      fill: #f59e0b;
+    }
+    .flow-dot-3b {
+      offset-path: path('M 650 295 L 590 295');
+      animation: flowRight 1.5s linear infinite;
+      animation-delay: 0.8s;
+      fill: #f59e0b;
+    }
+    .flow-dot-4 {
+      offset-path: path('M 400 345 L 260 415');
+      animation: flowRight 2s linear infinite;
+      animation-delay: 1.5s;
+      fill: #e879f9;
+    }
+    .flow-dot-5 {
+      offset-path: path('M 500 345 L 660 415');
+      animation: flowRight 2s linear infinite;
+      animation-delay: 1.5s;
+      fill: #38bdf8;
+    }
+    .flow-dot-6 {
+      offset-path: path('M 630 415 L 480 345');
+      animation: flowRight 2.5s linear infinite;
+      animation-delay: 3s;
+      fill: #22c55e;
+    }
+    .flow-dot-7 {
+      offset-path: path('M 280 545 L 420 345');
+      animation: flowRight 2s linear infinite;
+      fill: #fb923c;
+    }
+    .flow-dot-8 {
+      offset-path: path('M 370 580 L 600 580');
+      animation: flowRight 2s linear infinite;
+      animation-delay: 0.5s;
+      fill: #fb923c;
+    }
+
+    /* Status indicators */
+    .scan-ring {
+      animation: scanPulse 2s ease-out infinite;
+      fill: #22c55e;
+    }
+
+    /* Sequence labels */
+    .step-label {
+      animation: textFade 8s ease-in-out infinite;
+    }
+    .step-1 { animation-delay: 0s; }
+    .step-2 { animation-delay: 2s; }
+    .step-3 { animation-delay: 3.5s; }
+    .step-4 { animation-delay: 5s; }
+    .step-5 { animation-delay: 6.5s; }
+  </style>
+
+  <!-- Background -->
+  <rect width="960" height="750" fill="#f8fafc" rx="8"/>
+
+  <!-- Title -->
+  <text x="480" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">Deadlock Agent — Live Architecture</text>
+  <text x="480" y="55" text-anchor="middle" font-size="11" fill="#475569">Observe → Reason → Alert → Approve → Fix</text>
+
+  <!-- ═══════ STEP SEQUENCE LABELS (animated) ═══════ -->
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-weight="600" fill="#d97706" class="step-label step-1">① Generator creates deadlock in PostgreSQL</text>
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb" class="step-label step-2">② Agent scans and collects evidence with 4 tools</text>
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-weight="600" fill="#d97706" class="step-label step-3">③ Evidence sent to Ollama for AI diagnosis</text>
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-weight="600" fill="#a21caf" class="step-label step-4">④ Slack alert + Dashboard shows approve button</text>
+  <text x="480" y="735" text-anchor="middle" font-size="12" font-weight="600" fill="#16a34a" class="step-label step-5">⑤ Operator approves → Agent applies fix</text>
+
+  <!-- ═══════ TOP ROW: PostgreSQL + Generator ═══════ -->
+
+  <!-- PostgreSQL -->
+  <rect x="160" y="85" width="200" height="90" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="2" class="active-border" filter="url(#shadow)"/>
+  <text x="260" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">PostgreSQL</text>
+  <text x="260" y="140" text-anchor="middle" font-size="10" fill="#475569">orders | inventory tables</text>
+  <text x="260" y="158" text-anchor="middle" font-size="9" fill="#64748b">:5432 | deadlock_timeout=1s</text>
+
+  <!-- Scan pulse indicator on PostgreSQL -->
+  <circle cx="355" cy="95" r="6" class="scan-ring"/>
+  <circle cx="355" cy="95" r="3" fill="#22c55e"/>
+
+  <!-- Generator -->
+  <rect x="560" y="85" width="200" height="90" rx="12" fill="#ffffff" stroke="#ef4444" stroke-width="2" class="active-border" filter="url(#shadow)"/>
+  <text x="660" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#dc2626">Deadlock Generator</text>
+  <text x="660" y="140" text-anchor="middle" font-size="10" fill="#475569">Thread A: orders → inventory</text>
+  <text x="660" y="158" text-anchor="middle" font-size="10" fill="#475569">Thread B: inventory → orders</text>
+
+  <!-- Connection: Generator → PostgreSQL -->
+  <line x1="560" y1="130" x2="360" y2="130" stroke="#ef4444" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle class="flow-dot-1" r="5"/>
+  <circle class="flow-dot-1" r="5" style="animation-delay: 1s;"/>
+
+  <!-- ═══════ MIDDLE: Agent + Tools + LLM ═══════ -->
+
+  <!-- Tool Registry -->
+  <rect x="50" y="235" width="230" height="130" rx="12" fill="#ffffff" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="165" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="#7e22ce">Tool Registry</text>
+  <text x="165" y="280" text-anchor="middle" font-size="10" fill="#475569">Deterministic. Same every scan.</text>
+  <rect x="70" y="292" width="190" height="20" rx="4" fill="#f3e8ff"/>
+  <text x="80" y="306" font-size="9" fill="#6d28d9">① pg_locks + pg_stat_activity</text>
+  <rect x="70" y="316" width="190" height="20" rx="4" fill="#f3e8ff"/>
+  <text x="80" y="330" font-size="9" fill="#6d28d9">② Lock graph: who blocks whom</text>
+  <rect x="70" y="340" width="190" height="20" rx="4" fill="#f3e8ff"/>
+  <text x="80" y="354" font-size="9" fill="#6d28d9">③ Session details + SQL</text>
+
+  <!-- Agent (CENTER) -->
+  <rect x="320" y="225" width="260" height="140" rx="14" fill="#ffffff" stroke="#22c55e" stroke-width="2.5" class="active-border" filter="url(#shadow)"/>
+  <text x="450" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#15803d">Deadlock Agent</text>
+  <text x="450" y="280" text-anchor="middle" font-size="10" fill="#475569">Scans every 15 seconds</text>
+
+  <!-- Agent internal steps -->
+  <rect x="340" y="292" width="55" height="24" rx="4" fill="#dcfce7"/>
+  <text x="367" y="308" text-anchor="middle" font-size="8" font-weight="600" fill="#15803d">Detect</text>
+  <text x="402" y="308" text-anchor="middle" font-size="10" fill="#94a3b8">→</text>
+  <rect x="410" y="292" width="55" height="24" rx="4" fill="#dcfce7"/>
+  <text x="437" y="308" text-anchor="middle" font-size="8" font-weight="600" fill="#15803d">Reason</text>
+  <text x="472" y="308" text-anchor="middle" font-size="10" fill="#94a3b8">→</text>
+  <rect x="480" y="292" width="40" height="24" rx="4" fill="#dcfce7"/>
+  <text x="500" y="308" text-anchor="middle" font-size="8" font-weight="600" fill="#15803d">Act</text>
+
+  <text x="450" y="345" text-anchor="middle" font-size="9" fill="#64748b">Port :9090 | /metrics | /approve</text>
+
+  <!-- Scan pulse on agent -->
+  <circle cx="575" cy="235" r="6" class="scan-ring"/>
+  <circle cx="575" cy="235" r="3" fill="#22c55e"/>
+
+  <!-- LLM Gateway -->
+  <rect x="630" y="235" width="260" height="120" rx="12" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="760" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Ollama (Mistral)</text>
+  <text x="760" y="285" text-anchor="middle" font-size="10" fill="#475569">+ LoRA Deadlock Adapter</text>
+  <text x="760" y="310" text-anchor="middle" font-size="9" fill="#d97706">Evidence in → Diagnosis out</text>
+  <text x="760" y="330" text-anchor="middle" font-size="9" fill="#64748b">localhost:11434 | 48ms inference</text>
+
+  <!-- Connection: Agent → PostgreSQL (reads) -->
+  <line x1="380" y1="225" x2="300" y2="175" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-2" r="4"/>
+
+  <!-- Connection: Tools → Agent -->
+  <line x1="280" y1="285" x2="320" y2="285" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Connection: Agent → LLM -->
+  <line x1="580" y1="275" x2="630" y2="275" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-3a" r="4"/>
+
+  <!-- Connection: LLM → Agent -->
+  <line x1="630" y1="295" x2="580" y2="295" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-3b" r="4"/>
+
+  <!-- ═══════ ALERT ROW: Slack + Dashboard ═══════ -->
+
+  <!-- Slack -->
+  <rect x="100" y="420" width="210" height="85" rx="12" fill="#ffffff" stroke="#e879f9" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="205" y="452" text-anchor="middle" font-size="13" font-weight="700" fill="#a21caf">Slack</text>
+  <text x="205" y="472" text-anchor="middle" font-size="10" fill="#475569">Webhook notification</text>
+  <text x="205" y="492" text-anchor="middle" font-size="9" fill="#a21caf">🔔 "DEADLOCK DETECTED"</text>
+
+  <!-- Connection: Agent → Slack -->
+  <line x1="380" y1="365" x2="260" y2="420" stroke="#e879f9" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-4" r="4"/>
+
+  <!-- Approval Dashboard -->
+  <rect x="600" y="420" width="250" height="85" rx="12" fill="#ffffff" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="725" y="452" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Approval Dashboard</text>
+  <text x="725" y="472" text-anchor="middle" font-size="10" fill="#475569">localhost:8080</text>
+
+  <!-- Approve button mockup -->
+  <rect x="660" y="482" width="80" height="18" rx="6" fill="#059669"/>
+  <text x="700" y="495" text-anchor="middle" font-size="8" font-weight="700" fill="#ffffff">Approve Fix</text>
+  <rect x="748" y="482" width="60" height="18" rx="6" fill="#374151"/>
+  <text x="778" y="495" text-anchor="middle" font-size="8" fill="#94a3b8">Dismiss</text>
+
+  <!-- Connection: Agent → Dashboard -->
+  <line x1="520" y1="365" x2="670" y2="420" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-5" r="4"/>
+
+  <!-- Connection: Dashboard → Agent (approval) -->
+  <line x1="640" y1="420" x2="490" y2="365" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.3" stroke-dasharray="5 3"/>
+  <circle class="flow-dot-6" r="4"/>
+
+  <!-- Connection: Agent → PostgreSQL (fix after approval) -->
+  <line x1="350" y1="225" x2="240" y2="175" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.3" stroke-dasharray="5 3"/>
+  <text x="275" y="195" text-anchor="middle" font-size="8" fill="#4ade80">pg_terminate_backend</text>
+
+  <!-- ═══════ BOTTOM ROW: Monitoring ═══════ -->
+
+  <!-- Prometheus -->
+  <rect x="120" y="555" width="230" height="75" rx="12" fill="#ffffff" stroke="#fb923c" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="235" y="582" text-anchor="middle" font-size="13" font-weight="700" fill="#c2410c">Prometheus</text>
+  <text x="235" y="600" text-anchor="middle" font-size="10" fill="#475569">+ PG Exporter</text>
+  <text x="235" y="618" text-anchor="middle" font-size="9" fill="#64748b">Scrapes :9090/metrics + :9187</text>
+
+  <!-- Connection: Prometheus scrapes Agent -->
+  <line x1="280" y1="555" x2="420" y2="365" stroke="#fb923c" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="3 3"/>
+  <circle class="flow-dot-7" r="3"/>
+
+  <!-- Grafana -->
+  <rect x="600" y="555" width="250" height="75" rx="12" fill="#ffffff" stroke="#34d399" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="725" y="582" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Grafana Dashboard</text>
+  <text x="725" y="600" text-anchor="middle" font-size="10" fill="#475569">localhost:3000</text>
+  <text x="725" y="618" text-anchor="middle" font-size="9" fill="#059669">Detected: 14 | Fixed: 12 | Pending: 2</text>
+
+  <!-- Connection: Prometheus → Grafana -->
+  <line x1="350" y1="590" x2="600" y2="590" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle class="flow-dot-8" r="4"/>
+
+  <!-- ═══════ Docker Compose boundary ═══════ -->
+  <rect x="30" y="70" width="900" height="580" rx="16" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="8 4"/>
+  <text x="50" y="665" font-size="9" fill="#64748b">docker-compose.yml — 7 services — runs on Mac Apple Silicon M4 Pro 48GB</text>
+
+  <!-- Ollama label outside compose -->
+  <text x="840" y="665" text-anchor="end" font-size="9" fill="#64748b">Ollama on host :11434</text>
+
+</svg>
