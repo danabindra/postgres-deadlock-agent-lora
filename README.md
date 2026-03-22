@@ -26,9 +26,10 @@ If you want to see the actual app this is connected to, it is at  [postgres-dead
 | `train.jsonl` | 350 labelled instruction pairs, deadlock scenarios as input, expert diagnosis as output |
 | `valid.jsonl` | examples to check if the adapter is actually learning |
 | `postgres_deadlock_training_examples_50.jsonl` | raw 50 postgres examples the training data is built from |
-| `bible-addendum-training-data.md` | Notes on how the training data ws generated and the prompt template  |
+| `bible-addendum-training-data.md` | Notes on how the training data was generated and the prompt template |
 | `adapters/` | LoRA weights (tracked via Git LFS) |
 | `deadlock-agent-animated.svg` | architecture diagram showing how everything connects |
+| `prompts/` | Copy-paste prompts for generating v2 JSONL training data (one per issue type) |
 
 ---
 
