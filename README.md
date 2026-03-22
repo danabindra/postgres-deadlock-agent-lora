@@ -1,7 +1,7 @@
 # postgres-deadlock-agent-lora
 
 ## POV
-So this repo is basically me figuring out how to fine-tune a the model the dadlock agent uses.
+So this repo is basically me figuring out how to fine-tune the model the deadlock agent uses.
 
 The deadlock agent works. It collects real data from pg_locks, ships it to the LLM (Mistral), gets back a diagnosis a junior engineer could act on. 
 
